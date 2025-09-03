@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PWDN — Poor Women Development Network</title>
+  <meta name="description" content="Poor Women Development Network (PWDN) — empowering women and youth from poor households through education, capacity building, advocacy and community programs." />
+  <meta name="keywords" content="PWDN, women empowerment, Rwanda, Crescence Mukantabana, NGO, gender equality" />
+  <meta name="color-scheme" content="light dark" />
+
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root{
+      --teal:#0aa89e;
+      --purple:#6c4bb8;
+      --gold:#ffcc00;
+      --muted:#f5f7fa;
+      --text:#222;
+      --card:#ffffff;
+      --radius:12px;
+      --max-width:1100px;
+    }
+    /* Dark overrides */
+    body.dark-mode {
+      --muted:#0d0d0d;
+      --text:#e9eef6;
+      --card:#121212;
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; }
+    html{ scroll-behavior:smooth; }
+    body{ background:var(--muted); color:var(--text); line-height:1.6; padding-top:72px; transition:background .25s, color .25s; }
+
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; border-radius:8px; }
+
+    /* layout */
+    .container{ max-width:var(--max-width); margin:0 auto; padding:0 18px; }
+
+    /* NAV */
+    nav{ position:fixed; top:0; left:0; right:0; height:72px; background:linear-gradient(90deg,var(--teal),var(--purple)); display:flex; align-items:center; justify-content:space-between; padding:10px 18px; z-index:1000; box-shadow:0 6px 18px rgba(0,0,0,.08); }
+    .brand { display:flex; gap:12px; align-items:center; color:#fff; font-weight:700; letter-spacing:.3px; }
+    .brand img{ width:48px; height:48px; border-radius:8px; object-fit:cover; box-shadow:0 4px 10px rgba(0,0,0,.18); background:#fff; padding:4px; }
+    .brand .title{ font-size:1.05rem; }
+
+    /* nav links */
+    #nav-links{ display:flex; gap:20px; list-style:none; align-items:center; }
+    #nav-links a{ color:#fff; font-weight:600; padding:8px 10px; border-radius:8px; }
+    #nav-links a:hover, #nav-links a:focus{ background:rgba(255,255,255,.08); outline:none; }
+
+    /* desktop-only toggle */
+    #mode-toggle{ display:inline-flex; align-items:center; gap:8px; border:none; background:transparent; cursor:pointer; color:#1b1b1b; }
+    #mode-toggle.desktop-only{ display:inline-flex; }
+    /* oval switch */
+    .toggle-pill{ width:56px; height:30px; background:var(--gold); border-radius:999px; padding:3px; display:inline-flex; align-items:center; box-shadow:0 3px 8px rgba(0,0,0,.12); }
+    .toggle-pill .knob{ width:24px; height:24px; border-radius:50%; background:var(--purple); transform:translateX(0); transition:transform .22s ease, background .22s ease; }
+    body.dark-mode .toggle-pill{ background:#444; }
+    body.dark-mode .toggle-pill .knob{ background:var(--gold); transform:translateX(26px); }
+
+    /* hamburger */
+    .hamburger{ display:none; width:44px; height:44px; align-items:center; justify-content:center; border-radius:8px; cursor:pointer; background:rgba(255,255,255,.06); border:0; }
+    .hamburger .bar{ width:20px; height:2px; background:#fff; margin:3px 0; transition:transform .2s, opacity .2s; }
+
+    /* mobile menu drawer */
+    @media (max-width:768px){
+      #nav-links{ position:fixed; top:72px; left:-110%; width:100%; height:calc(100% - 72px); background:linear-gradient(180deg,var(--teal),var(--purple)); flex-direction:column; align-items:center; justify-content:center; gap:28px; transition:left .22s ease; padding:24px; z-index:950; }
+      #nav-links.show{ left:0; }
+      .hamburger{ display:flex; }
+      #mode-toggle.desktop-only{ display:none; }
+    }
+
+    /* hero */
+    header.hero{ padding:120px 0 70px; text-align:center; color:#fff; background:linear-gradient(180deg, rgba(0,0,0,.1), rgba(0,0,0,.05)); }
+    .hero-inner{ display:flex; gap:28px; align-items:center; justify-content:center; flex-wrap:wrap; }
+    .hero-logo{ width:160px; border-radius:16px; border:4px solid rgba(255,255,255,.08); background:#fff; padding:10px; }
+    .hero h1{ font-size:2.2rem; margin-bottom:10px; color:#fff; text-shadow:0 4px 20px rgba(0,0,0,.28); }
+    .hero p.lead{ font-size:1.05rem; max-width:860px; margin:auto 0 18px; opacity:.95; }
+
+    .hero .actions{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .cta { padding:12px 20px; border-radius:10px; font-weight:700; cursor:pointer; }
+    .cta.primary{ background:var(--gold); color:#111; box-shadow:0 6px 18px rgba(0,0,0,.12); }
+    .cta.secondary{ background:transparent; border:2px solid rgba(255,255,255,.16); color:#fff; }
+
+    /* content sections */
+    .section-card{ background:var(--card); padding:20px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(0,0,0,.06); margin-bottom:18px; }
+    .two-col{ display:grid; grid-template-columns: 1fr 360px; gap:28px; align-items:start; }
+    @media (max-width:880px){ .two-col{ grid-template-columns:1fr; } }
+
+    h2.section-title{ color:var(--purple); margin-bottom:12px; text-align:center; }
+
+    /* lists and badges */
+    .badges{ display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .badge{ background:rgba(0,0,0,.04); padding:8px 12px; border-radius:999px; font-weight:600; color:var(--text); }
+    .goal{ color:var(--teal); font-weight:700; }
+
+    /* programs & stories grid */
+    .grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:18px; }
+    .program{ background:var(--card); padding:16px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,.05); }
+    .program h3{ color:var(--purple); margin-bottom:8px; }
+
+    /* news cards */
+    .news { background:var(--card); padding:14px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,.04); }
+    .news time{ display:block; color:#666; font-size:.9rem; margin-bottom:8px; }
+
+    /* contact */
+    .contact .info{ display:flex; gap:18px; flex-wrap:wrap; justify-content:center; margin-top:12px; }
+    .contact .info a{ background:var(--card); padding:12px 16px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,.04); display:inline-flex; gap:8px; align-items:center; font-weight:600; color:var(--text); }
+
+    /* footer */
+    footer{ margin-top:28px; padding:24px 0; background:linear-gradient(90deg,var(--purple),var(--teal)); color:#fff; text-align:center; border-radius:8px; }
+
+    /* small helpers */
+    .muted{ color:#6b6b6b; }
+    .center{ text-align:center; }
+
+    /* reduce motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      *{ scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav role="navigation" aria-label="Primary navigation">
+    <div class="brand container" style="justify-content:flex-start;">
+      <!-- logo from user -->
+      <img src="https://i.imgur.com/LRWV7TM.png" alt="PWDN logo" />
+      <div class="title">Poor Women Development Network (PWDN)</div>
+    </div>
+
+    <!-- right side nav (small screen will hide to hamburger) -->
+    <div style="display:flex; align-items:center; gap:12px; margin-right:14px;">
+      <button id="mode-toggle" class="desktop-only" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="toggle-pill" aria-hidden="true"><span class="knob"></span></span>
+      </button>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="nav-links" aria-expanded="false">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+    </div>
+
+    <ul id="nav-links" class="container" style="justify-content:center;">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#vision">Vision</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#getinvolved">Get Involved</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- overlay backdrop for mobile -->
+  <div id="nav-backdrop" class="nav-backdrop"></div>
+
+  <!-- HERO / HOME -->
+  <header id="home" class="hero" role="banner" aria-labelledby="hero-title" style="background:linear-gradient(180deg, rgba(12,12,12,.18), rgba(12,12,12,.12));">
+    <div class="container hero-inner">
+      <img class="hero-logo" src="https://i.imgur.com/LRWV7TM.png" alt="PWDN logo" loading="lazy">
+      <div style="max-width:760px;">
+        <h1 id="hero-title">Empowering Women. Strengthening Communities.</h1>
+        <p class="lead">Poor Women Development Network (PWDN) works to uplift women, youth and families from poor households through education, capacity building, advocacy, and community programs. Founded in 2010 and led by Crescence Mukantabana—an activist for women's rights since 1986—PWDN is a trusted voice for gender equality and economic resilience.</p>
+
+        <div class="hero-actions">
+          <a class="cta primary" href="#getinvolved" title="Support Us — donations & volunteering">Support Us</a>
+          <a class="cta secondary" href="#getinvolved" title="Join Us Today — volunteer or partner">Join Us Today</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" role="main" aria-labelledby="main-heading">
+
+    <!-- About / Founder -->
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title" class="section-title">About PWDN</h2>
+      <div class="two-col">
+        <div>
+          <div class="section-card">
+            <strong>Founded:</strong> 2010<br>
+            <strong>Founder & Executive Director:</strong> Crescence Mukantabana — a woman champion, activist and feminist advocating for human rights and women empowerment since 1986.
+            <p class="muted" style="margin-top:12px;">PWDN is community-driven — focusing on dignity, rights, and sustainable solutions for women and youth in Rwanda.</p>
+          </div>
+
+          <div class="section-card" style="margin-top:16px;">
+            <h3>Vision</h3>
+            <p><strong>To have a Rwandan society where all women enjoy their rights.</strong></p>
+            <h3>Mission</h3>
+            <p><strong>To contribute to the empowerment of women and youth from poor households.</strong></p>
+          </div>
+
+          <div class="section-card" style="margin-top:16px;">
+            <h3>Values</h3>
+            <div class="badges">
+              <span class="badge">Humanity</span>
+              <span class="badge">Accountability</span>
+              <span class="badge">Transparency</span>
+              <span class="badge">Honesty</span>
+              <span class="badge">Self-confidence</span>
+              <span class="badge">Networking</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Founder image and quick contact -->
+        <aside>
+          <div class="section-card center">
+            <img src="https://i.imgur.com/lfqZneX.png" alt="Crescence Mukantabana — Founder & Executive Director" loading="lazy">
+            <h3 style="margin-top:12px;">Crescence Mukantabana</h3>
+            <div class="muted">Founder & Executive Director</div>
+            <div style="margin-top:12px;">
+              <a href="tel:+250788513975" class="contact-link">📞 +250 788 513 975</a><br>
+              <a href="mailto:rdfp2020@gmail.com">✉ rdfp2020@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="section-card" style="margin-top:16px;">
+            <h4>Target Groups</h4>
+            <div class="badges">
+              <span class="badge">Women</span>
+              <span class="badge">Youth</span>
+              <span class="badge">Children</span>
+              <span class="badge">Households</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Intervention Strategies -->
+    <section id="vision" aria-labelledby="vision-title">
+      <h2 id="vision-title" class="section-title">Intervention Strategies</h2>
+      <div class="grid">
+        <div class="program">
+          <h3>Capacity Building</h3>
+          <p>Training and mentorship programs to develop skills, entrepreneurship and leadership for women and youth.</p>
+        </div>
+        <div class="program">
+          <h3>Education / IEC</h3>
+          <p>Information, education and communication on rights, health, economic opportunities and civic participation.</p>
+        </div>
+        <div class="program">
+          <h3>Research</h3>
+          <p>Local research to inform policy, program design and targeted interventions for vulnerable communities.</p>
+        </div>
+        <div class="program">
+          <h3>Advocacy & Lobby</h3>
+          <p>Lobbying for gender-sensitive policies, legal protection and access to resources for women.</p>
+        </div>
+        <div class="program">
+          <h3>Groups & Cooperatives</h3>
+          <p>Organization and formation of groups/cooperatives to strengthen savings, access to microfinance and markets.</p>
+        </div>
+        <div class="program">
+          <h3>Technical & Financial Support</h3>
+          <p>Providing small grants, technical assistance and linkages to partners to scale impact.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs & Success Stories -->
+    <section id="programs" aria-labelledby="programs-title">
+      <h2 id="programs-title" class="section-title">Programs & Success Stories</h2>
+      <div class="grid">
+        <article class="program">
+          <h3>Women Skills Lab</h3>
+          <p>Vocational and business training for women from poor households. Over 300 women trained in tailoring, soap-making and agribusiness with 70% reporting improved incomes.</p>
+        </article>
+        <article class="program">
+          <h3>Youth Mentorship</h3>
+          <p>Mentorship and digital literacy for youth. Graduates have formed cooperatives and started small enterprises.</p>
+        </article>
+        <article class="program">
+          <h3>Community Outreach</h3>
+          <p>Health and rights campaigns in Muhima Sector — increased awareness and improved access to services among women and children.</p>
+        </article>
+        <article class="program">
+          <h3>Success Story: Cooperative Rise</h3>
+          <p>A women’s savings group supported by PWDN received seed funding and grew into a profitable cooperative that supports school fees and food security.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Get Involved -->
+    <section id="getinvolved" aria-labelledby="involved-title">
+      <h2 id="involved-title" class="section-title">Get Involved</h2>
+      <div class="two-col">
+        <div>
+          <div class="section-card">
+            <h3>Donate</h3>
+            <p>Your donations directly support training, small grants and community campaigns. We ensure accountability and transparent use of funds.</p>
+            <div style="margin-top:12px;">
+              <a class="cta primary" href="mailto:rdfp2020@gmail.com?subject=Donation%20to%20PWDN" title="Donate via email">Donate via Email</a>
+              <a class="cta secondary" href="#" title="Bank details or payment page">Bank / Payment Info</a>
+            </div>
+          </div>
+
+          <div class="section-card" style="margin-top:16px;">
+            <h3>Volunteer</h3>
+            <p>Join our programs as a volunteer — remotely or in Kigali. We welcome trainers, researchers, fundraisers and community mobilizers.</p>
+            <a class="cta primary" href="mailto:mukacresce@gmail.com?subject=Volunteer%20at%20PWDN">Apply to Volunteer</a>
+          </div>
+        </div>
+
+        <aside>
+          <div class="section-card center">
+            <h3>How contributions help</h3>
+            <ul style="text-align:left; margin-top:8px;">
+              <li>Provide training materials for 30 women</li>
+              <li>Seed grants for market access</li>
+              <li>Outreach and IEC campaigns in communities</li>
+            </ul>
+            <div style="margin-top:12px;" class="muted">All donations are handled with transparency and regular reporting.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- News / Blog -->
+    <section id="news" aria-labelledby="news-title">
+      <h2 id="news-title" class="section-title">News & Updates</h2>
+      <div class="grid">
+        <article class="news">
+          <time datetime="2025-03-01">Mar 1, 2025</time>
+          <h3>PWDN launches new women entrepreneurship cohort</h3>
+          <p>We launched a new cohort of 50 women entrepreneurs trained in digital marketing and small-business management.</p>
+        </article>
+        <article class="news">
+          <time datetime="2024-11-12">Nov 12, 2024</time>
+          <h3>Community health & rights campaign in Muhima</h3>
+          <p>Our team partnered with local clinics to offer education and screenings for mothers and children.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="section-title">Contact Us</h2>
+
+      <div class="section-card center">
+        <strong>Founder & Executive Director</strong><br>
+        <div style="margin-top:8px; font-weight:700;">Crescence Mukantabana</div>
+        <div class="muted">Muhima Sector, Nyarugenge District, Kigali, Rwanda</div>
+
+        <div class="contact info" style="margin-top:14px;">
+          <a href="tel:+250788513975" title="Call">📞 +250 788 513 975</a>
+          <a href="mailto:rdfp2020@gmail.com">✉ rdfp2020@gmail.com</a>
+          <a href="mailto:mukacresce@gmail.com">✉ mukacresce@gmail.com</a>
+          <a href="https://www.facebook.com/PoorWomenDevelopmentNetwork" target="_blank" rel="noopener">Facebook</a>
+        </div>
+
+        
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+        <img src="https://i.imgur.com/LRWV7TM.png" alt="PWDN logo small" style="width:48px; height:48px; border-radius:8px;">
+        <div style="text-align:left;">
+          <div style="font-weight:700;">Poor Women Development Network (PWDN)</div>
+          <div class="muted">Muhima Sector, Nyarugenge District, Kigali · © 2010–2025</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px; text-align:center;" class="muted">Designed to inspire trust, hope and impact — contact us to partner or support our work.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/scrollreveal" defer></script>
+  <script>
+    // Pre-apply dark preference quickly (no flash)
+    (function(){
+      try {
+        const p = localStorage.getItem('pwdn-dark');
+        if (p === '1') document.body.classList.add('dark-mode');
+      } catch(e){}
+    })();
+
+    document.addEventListener('DOMContentLoaded', function(){
+      // Elements
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('nav-links');
+      const backdrop = document.getElementById('nav-backdrop');
+      const modeToggle = document.getElementById('mode-toggle');
+
+      // Mobile menu open/close
+      function openMenu(){
+        navLinks.classList.add('show');
+        backdrop.classList.add('show');
+        document.body.classList.add('menu-open');
+        hamburger.setAttribute('aria-expanded','true');
+        backdrop.style.display = 'block';
+      }
+      function closeMenu(){
+        navLinks.classList.remove('show');
+        backdrop.classList.remove('show');
+        document.body.classList.remove('menu-open');
+        hamburger.setAttribute('aria-expanded','false');
+        backdrop.style.display = '';
+      }
+      hamburger.addEventListener('click', ()=> { navLinks.classList.contains('show') ? closeMenu() : openMenu(); });
+      backdrop.addEventListener('click', closeMenu);
+      // Close when a nav link is clicked (mobile)
+      navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+      // keyboard
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+      // Dark mode toggle (oval)
+      if (modeToggle){
+        modeToggle.addEventListener('click', () => {
+          const isDark = document.body.classList.toggle('dark-mode');
+          try { localStorage.setItem('pwdn-dark', isDark ? '1' : '0'); } catch(e){}
+        });
+      }
+
+      // Lightweight ScrollReveal usage
+      if (window.ScrollReveal){
+        const sr = ScrollReveal({ distance:'20px', duration:700, easing:'ease-out', interval:80, reset:false, mobile:true });
+        sr.reveal('.hero-inner',{ origin:'bottom' });
+        sr.reveal('#about .section-card, #about aside',{ origin:'bottom' });
+        sr.reveal('.program',{ origin:'bottom' });
+        sr.reveal('.news',{ origin:'bottom' });
+        sr.reveal('.contact',{ origin:'bottom' });
+      }
+    });
+  </script>
+</body>
+</html>
